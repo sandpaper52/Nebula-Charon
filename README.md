@@ -2,12 +2,7 @@
 
 [Nebula on the Ship](https://github.com/Dolly1016/Nebula) に第三陣営「カロン」を追加するアドオンです。
 
-## 実装計画
-
-1. Buskerと同じ偽装死状態、マップ内での復活、バイタル上の隠蔽、死亡確定処理を組み込む。
-2. 偽装死ごとの最長距離を記録し、ステュクスの増減、上限、HUD表示を実装する。
-3. 勝利ラインをまたいだときに資格を同期し、ゲーム終了判定で資格のあるカロンを勝者にする。
-4. 日英の設定と役職辞典を追加し、導入用ZIPを作る。コンパイルと複数クライアントでの動作確認後にGitHub Releaseで配布する。
+本アドオンは有志による非公式アドオンです。Nebula on the Shipの公式開発チームによる制作・配布・承認を受けておらず、公式開発チームとは関係ありません。
 
 ## 導入
 
@@ -15,13 +10,15 @@
 ZIPの直下に `addon.meta`、`Scripts/`、`Language/` が必要です。
 ゲーム設定の第三陣営でカロンを有効にできます。
 
-## 仕様
+## カロン（Charon）の役職概要
 
-- 偽装死のたびに最長距離をリセットします。最長距離の更新分に増加倍率を掛け、閾値と余剰量の合計を上限とします。余剰量の初期値は20です。
-- 偽装死していないタスクフェーズでは、死亡確定後も毎秒1距離単位に減少倍率を掛けた量だけ減ります。会議と追放演出の間はゲージを停止します。
-- 「時間制限」がOffのときに有効時間を適用し、Onのときにカウントダウンを無効にします。
-- 勝敗のあるゲーム終了時に閾値以上のカロンが勝敗を上書きします。複数のカロンが条件を満たせば全員が対象です。
-- 役職アイコンは設定していません。能力ボタンには本体のBusker用スプライトを使います。
+> 暗澹たる渡し守
+
+カロンは、偽装死で幽霊になり、特殊ゲージ「ステュクス」をためて勝利を狙う第三陣営の役職です。
+
+- **偽装死と復活** — 偽装死を使うと、その場に死体を残して幽霊として移動できます。死体が残っている間は、マップ内の現在地で復活できます。会議の開始、有効時間の終了、死体の消失で死亡が確定します。
+- **ステュクス** — 偽装死中に自分の死体から遠ざかり、その回の最長距離を更新した分だけ増えます。偽装死していないタスクフェーズ中は減少し、会議中は増減しません。
+- **勝利条件** — ゲーム終了時にステュクスが必要量以上なら、カロンが勝利を奪います。死亡後も条件を満たせば勝利でき、複数のカロンが条件を満たした場合は全員が勝利します。
 
 ## 開発と検証
 
@@ -34,5 +31,7 @@ ZIPの直下に `addon.meta`、`Scripts/`、`Language/` が必要です。
 - ホストとゲストの両方で、閾値未満・閾値ちょうど・閾値以上・複数カロンの勝利結果を確認します。
 
 ## English
+
+This is an unofficial add-on. It is unaffiliated with and has not been endorsed by the Nebula on the Ship development team.
 
 Charon is a neutral role for Nebula on the Ship. Feign death, travel farther from your corpse to build Styx, and revive within the map before a meeting or expiration. If Styx meets the threshold when the game ends, Charon takes the win. Put `Charon.zip` in the modded game's `Addons/` directory and enable Charon in the neutral role settings.
