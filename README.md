@@ -31,12 +31,26 @@ ZIPの直下に `addon.meta`、`Scripts/`、`Language/` が必要です。
 
 ## English
 
-This is an unofficial add-on. It is unaffiliated with the Nebula on the Ship development team.
+Nebula-Charon is an unofficial add-on for Nebula on the Ship. It is unaffiliated with the official Nebula on the Ship development team.
 
-Charon is a neutral role for Nebula on the Ship. Feign death, travel farther from your corpse to build Styx, and revive within the map before a meeting or, when the time limit is on, before the timer expires. If Styx meets the threshold when the game ends, Charon takes the win. Put `Charon.zip` in the modded game's `Addons/` directory and enable Charon in the neutral role settings.
+### Installation
+
+Place `Charon.zip` in the `Addons/` folder of your Nebula on the Ship installation and leave it zipped. Enable Charon under Neutral Roles in the game settings.
+
+### Role overview
+
+#### Charon
+
+> The Bleak Ferryman
+
+Charon is a neutral role that feigns death to build up a gauge called Styx.
+
+- **Feign Death and Revive** — Leave a corpse behind and move as a ghost. While the corpse remains, you can revive at your current location within the map. You die permanently if a meeting starts, your corpse disappears, or the timer expires while Feign Death Time Limit is enabled.
+- **Styx** — While feigning death, you gain Styx only when you move farther from your corpse than you have during that attempt. During the task phase, Styx drains whenever you are outside feigned death. It stays the same during meetings.
+- **Win condition** — If your Styx meets or exceeds the threshold when the game ends, you take the win, even if you are dead. If multiple Charons qualify, they all win.
 
 ## ライセンス / License
 
 Nebula-Charon のソースコードと翻訳は GPL-3.0-only で配布します。ライセンス本文は [LICENSE](LICENSE) を参照してください。
 
-Nebula-Charon’s source code and translations are licensed under GPL-3.0-only. Its feigned death and revival logic is based on Nebula’s Busker implementation.
+Nebula-Charon’s source code and translations are licensed under GPL-3.0-only. See [LICENSE](LICENSE) for the full text.
