@@ -34,3 +34,11 @@ ZIPの直下に `addon.meta`、`Scripts/`、`Language/` が必要です。
 This is an unofficial add-on. It is unaffiliated with the Nebula on the Ship development team.
 
 Charon is a neutral role for Nebula on the Ship. Feign death, travel farther from your corpse to build Styx, and revive within the map before a meeting or, when the time limit is on, before the timer expires. If Styx meets the threshold when the game ends, Charon takes the win. Put `Charon.zip` in the modded game's `Addons/` directory and enable Charon in the neutral role settings.
+
+## ライセンス / License
+
+Nebula-Charon のソースコードと翻訳は GPL-3.0-only で配布します。ライセンス本文は [LICENSE](LICENSE) を参照してください。
+
+偽装死・復活処理は Dolly1016 と Nebula の貢献者による [Busker の実装](https://github.com/Dolly1016/Nebula-Public/blob/63ec89721846903ad4ae43373e3f812f09fd5af6/NebulaPluginNova/Roles/Crewmate/Busker.cs) を参考にしています。
+
+Nebula-Charon’s source code and translations are licensed under GPL-3.0-only. Its feigned death and revival logic is based on Nebula’s Busker implementation.

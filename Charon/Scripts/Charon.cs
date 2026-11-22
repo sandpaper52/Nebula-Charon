@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Feigned death and revival logic based on Nebula-Public's Busker by Dolly1016 and contributors.
 using System;
 using System.Collections.Generic;
 using Nebula;
