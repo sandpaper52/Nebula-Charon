@@ -24,9 +24,6 @@ ZIPの直下に `addon.meta`、`Scripts/`、`Language/` が必要です。
 
 ## 開発と検証
 
-参照ソースは [Nebula-Public Snapshot 26.11.04b](https://github.com/Dolly1016/Nebula-Public/commit/63ec897) です。
-偽装死の状態管理とHUDに本体の内部APIを使用するため、`UseHiddenMembers` を有効にしています。Nebula更新時には再検証してください。
-
 - 開発環境で `Charon/` を対象に `nos_check` を実行します。ゲーム内のエラーは `NebulaLog.txt` と `BepInEx/LogOutput.log` の両方で確認できます。
 - 実機では停止、接近、最長距離未満の往復、最長距離更新、復活後の減少、会議中の停止を確認します。
 - 有効時間の終了、通報、緊急会議、死体の消失、バイタルのOn/Offを確認します。
