@@ -4,7 +4,7 @@
 "teams.charon" : "Charon"
 "end.charon" : "Charon Wins%EXTRA%"
 "role.charon.doc" : "Charon is a neutral role who feigns death and builds Styx by traveling away from their corpse."
-"role.charon.winCond" : "If Styx meets or exceeds the threshold when the game ends, Charon takes the win. Charon can qualify after dying."
+"role.charon.winCond" : "If Styx meets or exceeds the threshold when the game ends, Charon takes the win. Charon can win while feigning death, but permanent death makes Charon ineligible."
 "role.charon.ability.title" : "Abilities"
 "role.charon.ability.main" : "While feigning death, gain Styx only for the distance that extends your record for this attempt. Styx drains in the task phase outside feigned death and stays fixed during meetings."
 "role.charon.ability.pseudocide" : "<title>Feign Death</title>Leave a corpse and move as a ghost. You die permanently if a meeting starts, the active timer expires, or the corpse disappears."

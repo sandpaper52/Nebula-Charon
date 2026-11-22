@@ -50,7 +50,7 @@ public sealed class Charon : DefinedSingleAbilityRoleTemplate<Charon.Ability>, D
     private static readonly Image FeignImage = SpriteLoader.FromResource("Nebula.Resources.Buttons.BuskPseudocideButton.png", 115f);
     private static readonly Image ReviveImage = SpriteLoader.FromResource("Nebula.Resources.Buttons.BuskReviveButton.png", 115f);
 
-    private static readonly RemoteProcess<(byte PlayerId, bool Qualified)> ShareQualification = new(
+    private static readonly RemoteProcess<(byte PlayerId, bool Qualified, bool Feigning)> ShareQualification = new(
         "NebulaCharon.ShareQualification", (message, isLocal) =>
         {
             if (isLocal) return;
@@ -59,7 +59,11 @@ public sealed class Charon : DefinedSingleAbilityRoleTemplate<Charon.Ability>, D
             {
                 if (player.PlayerId != message.PlayerId) continue;
                 var ability = player.Role?.GetAbility<Ability>();
-                if (ability != null) ability.Qualified = message.Qualified;
+                if (ability != null)
+                {
+                    ability.Qualified = message.Qualified;
+                    ability.Feigning = message.Feigning;
+                }
                 break;
             }
         });
@@ -90,12 +94,16 @@ public sealed class Charon : DefinedSingleAbilityRoleTemplate<Charon.Ability>, D
         private global::DeadBody? corpse;
         private Vector2 lastPosition;
         private bool killPending;
-        private bool feigning;
         private bool growing;
         private float farthest;
         private float styx;
 
         internal bool Qualified { get; set; }
+        internal bool Feigning { get; set; }
+
+        private bool CanWin => Qualified && (!MyPlayer.IsDead ||
+            (Feigning && MyPlayer.PlayerState == PlayerStates.Pseudocide &&
+             !MeetingHud.Instance && !ExileController.Instance && Helpers.GetDeadBody(MyPlayer.PlayerId) != null));
 
         public Ability(Player player) : base(player)
         {
@@ -110,7 +118,7 @@ public sealed class Charon : DefinedSingleAbilityRoleTemplate<Charon.Ability>, D
 
             revive = NebulaAPI.Modules.AbilityButton(this, isArrangedAsKillButton: true)
                 .BindKey(VirtualKeyInput.Ability).SetImage(ReviveImage).SetLabel("revive");
-            revive.Visibility = _ => feigning && Helpers.GetDeadBody(MyPlayer.PlayerId) != null;
+            revive.Visibility = _ => Feigning && Helpers.GetDeadBody(MyPlayer.PlayerId) != null;
             revive.Availability = _ => MyPlayer.CanMove &&
                 MapData.GetCurrentMapData().CheckMapArea(MyPlayer.TruePosition);
             if (TimeLimit) revive.EffectTimer = NebulaAPI.Modules.Timer(this, Duration);
@@ -156,7 +164,8 @@ public sealed class Charon : DefinedSingleAbilityRoleTemplate<Charon.Ability>, D
                             return;
                         }
 
-                        feigning = true;
+                        Feigning = true;
+                        ShareQualification.Invoke((MyPlayer.PlayerId, Qualified, Feigning));
                         corpse = null;
                         farthest = 0f;
                         lastPosition = MyPlayer.TruePosition;
@@ -168,7 +177,7 @@ public sealed class Charon : DefinedSingleAbilityRoleTemplate<Charon.Ability>, D
 
         private void Revive()
         {
-            if (!feigning || Helpers.GetDeadBody(MyPlayer.PlayerId) == null) return;
+            if (!Feigning || Helpers.GetDeadBody(MyPlayer.PlayerId) == null) return;
 
             using var section = RPCRouter.CreateSection("CharonRevive");
             FinishFeigning(died: false);
@@ -192,12 +201,13 @@ public sealed class Charon : DefinedSingleAbilityRoleTemplate<Charon.Ability>, D
 
         private void FinishFeigning(bool died)
         {
-            if (!feigning) return;
+            if (!Feigning) return;
 
-            feigning = false;
+            Feigning = false;
             growing = false;
             corpse = null;
             ClearFeigningStatus();
+            ShareQualification.Invoke((MyPlayer.PlayerId, Qualified, Feigning));
             if (!died || !MyPlayer.IsDead) return;
 
             MyPlayer.GetModule<BalloonHolder>()?.OnDeadFinally();
@@ -221,9 +231,8 @@ public sealed class Charon : DefinedSingleAbilityRoleTemplate<Charon.Ability>, D
 
             growing = false;
             if (MeetingHud.Instance || ExileController.Instance) return;
-            if (!feigning)
+            if (!Feigning)
             {
-                // Ordinary ghosts remain eligible only while their retained Styx is sufficient.
                 SetStyx(styx - ev.DeltaTime * (float)Decrease);
                 return;
             }
@@ -268,7 +277,7 @@ public sealed class Charon : DefinedSingleAbilityRoleTemplate<Charon.Ability>, D
             if (qualified == Qualified) return;
 
             Qualified = qualified;
-            ShareQualification.Invoke((MyPlayer.PlayerId, qualified));
+            ShareQualification.Invoke((MyPlayer.PlayerId, qualified, Feigning));
         }
 
         private void OnGameEnding(EndCriteriaMetEvent ev) => OverrideWinner(ev);
@@ -282,7 +291,7 @@ public sealed class Charon : DefinedSingleAbilityRoleTemplate<Charon.Ability>, D
             foreach (var player in NebulaAPI.CurrentGame!.GetAllPlayers())
             {
                 if (!player.IsDisconnected && player.Role?.Role == MyRole &&
-                    player.Role.GetAbility<Ability>()?.Qualified == true)
+                    player.Role.GetAbility<Ability>()?.CanWin == true)
                     winners |= 1 << player.PlayerId;
             }
 

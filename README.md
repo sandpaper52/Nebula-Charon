@@ -20,7 +20,7 @@ ZIPの直下に `addon.meta`、`Scripts/`、`Language/` が必要です。
 
 - **偽装死と復活** — 偽装死を使うと、その場に死体を残して幽霊として移動できます。死体が残っている間は、マップ内の現在地で復活できます。会議の開始や死体の消失で死亡が確定します。「偽装死の時間制限」がOnの場合は、有効時間が切れたときも死亡が確定します。
 - **ステュクス** — 偽装死中に自分の死体から遠ざかり、その回の最長距離を更新した分だけ増えます。偽装死していないタスクフェーズ中は減少し、会議中は増減しません。
-- **勝利条件** — ゲーム終了時にステュクスが必要量以上なら、カロンが勝利を奪います。死亡後も条件を満たせば勝利でき、複数のカロンが条件を満たした場合は全員が勝利します。
+- **勝利条件** — ゲーム終了時にステュクスが必要量以上なら、カロンが勝利を奪います。偽装死中は勝利できますが、死亡が確定すると勝利できません。複数のカロンが条件を満たした場合は全員が勝利します。
 
 ## 開発と検証
 
@@ -47,7 +47,7 @@ Charon is a neutral role that feigns death to build up a gauge called Styx.
 
 - **Feign Death and Revive** — Leave a corpse behind and move as a ghost. While the corpse remains, you can revive at your current location within the map. You die permanently if a meeting starts, your corpse disappears, or the timer expires while Feign Death Time Limit is enabled.
 - **Styx** — While feigning death, you gain Styx only when you move farther from your corpse than you have during that attempt. During the task phase, Styx drains whenever you are outside feigned death. It stays the same during meetings.
-- **Win condition** — If your Styx meets or exceeds the threshold when the game ends, you take the win, even if you are dead. If multiple Charons qualify, they all win.
+- **Win condition** — If your Styx meets or exceeds the threshold when the game ends, you take the win while alive or feigning death. Permanent death makes you ineligible. If multiple Charons qualify, they all win.
 
 ## ライセンス / License
 
