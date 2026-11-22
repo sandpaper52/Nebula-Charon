@@ -30,7 +30,7 @@ public sealed class Charon : DefinedSingleAbilityRoleTemplate<Charon.Ability>, D
     private static readonly BoolConfiguration TimeLimit = NebulaAPI.Configurations.Configuration(
         Option + "timeLimit", false);
     private static readonly FloatConfiguration Duration = NebulaAPI.Configurations.Configuration(
-        Option + "duration", (2.5f, 120f, 2.5f), 30f, FloatConfigurationDecorator.Second, () => !TimeLimit);
+        Option + "duration", (2.5f, 120f, 2.5f), 30f, FloatConfigurationDecorator.Second, () => TimeLimit);
     private static readonly BoolConfiguration HideFromVitals = NebulaAPI.Configurations.Configuration(
         Option + "hideFromVitals", false);
     private static readonly FloatConfiguration Required = NebulaAPI.Configurations.Configuration(
@@ -111,7 +111,7 @@ public sealed class Charon : DefinedSingleAbilityRoleTemplate<Charon.Ability>, D
             revive.Visibility = _ => feigning && Helpers.GetDeadBody(MyPlayer.PlayerId) != null;
             revive.Availability = _ => MyPlayer.CanMove &&
                 MapData.GetCurrentMapData().CheckMapArea(MyPlayer.TruePosition);
-            if (!TimeLimit) revive.EffectTimer = NebulaAPI.Modules.Timer(this, Duration);
+            if (TimeLimit) revive.EffectTimer = NebulaAPI.Modules.Timer(this, Duration);
             revive.PlayFlashWhile = _ => true;
             revive.OnClick = _ => Revive();
             revive.OnEffectEnd = _ => FinishFeigning(died: true);
@@ -158,7 +158,7 @@ public sealed class Charon : DefinedSingleAbilityRoleTemplate<Charon.Ability>, D
                         corpse = null;
                         farthest = 0f;
                         lastPosition = MyPlayer.TruePosition;
-                        if (!TimeLimit) revive.StartEffect();
+                        if (TimeLimit) revive.StartEffect();
                         if (MeetingHud.Instance || ExileController.Instance) CancelFeigning();
                     });
             });

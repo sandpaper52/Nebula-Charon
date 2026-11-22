@@ -12,7 +12,7 @@
 "options.role.charon.detail" : "Build Styx by feigning death and take the win when the game ends."
 "options.role.charon.cooldown" : "Feign Death Cooldown"
 "options.role.charon.timeLimit" : "Feign Death Time Limit"
-"options.role.charon.timeLimit.detail" : "Off applies the Feign Death Duration. On disables the countdown."
+"options.role.charon.timeLimit.detail" : "On applies the Feign Death Duration. Off disables the countdown."
 "options.role.charon.duration" : "Feign Death Duration"
 "options.role.charon.hideFromVitals" : "Hide Feigned Death on Vitals"
 "options.role.charon.required" : "Styx Required to Win"

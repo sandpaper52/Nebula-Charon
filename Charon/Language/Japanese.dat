@@ -12,7 +12,7 @@
 "options.role.charon.detail" : "偽装死でステュクスをため、ゲーム終了時に勝利を奪います。"
 "options.role.charon.cooldown" : "偽装死クールダウン"
 "options.role.charon.timeLimit" : "偽装死の時間制限"
-"options.role.charon.timeLimit.detail" : "Offで偽装死の有効時間が適用され、Onで時間による失効がなくなります。"
+"options.role.charon.timeLimit.detail" : "Onで偽装死の有効時間が適用され、Offでは時間経過による死亡確定がありません。"
 "options.role.charon.duration" : "偽装死の有効時間"
 "options.role.charon.hideFromVitals" : "バイタル上での偽装死の隠蔽"
 "options.role.charon.required" : "勝利に必要なゲージの量"

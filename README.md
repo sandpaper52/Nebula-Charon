@@ -18,7 +18,7 @@ ZIPの直下に `addon.meta`、`Scripts/`、`Language/` が必要です。
 
 カロンは、偽装死で幽霊になり、特殊ゲージ「ステュクス」をためて勝利を狙う第三陣営の役職です。
 
-- **偽装死と復活** — 偽装死を使うと、その場に死体を残して幽霊として移動できます。死体が残っている間は、マップ内の現在地で復活できます。会議の開始、有効時間の終了、死体の消失で死亡が確定します。
+- **偽装死と復活** — 偽装死を使うと、その場に死体を残して幽霊として移動できます。死体が残っている間は、マップ内の現在地で復活できます。会議の開始や死体の消失で死亡が確定します。「偽装死の時間制限」がOnの場合は、有効時間が切れたときも死亡が確定します。
 - **ステュクス** — 偽装死中に自分の死体から遠ざかり、その回の最長距離を更新した分だけ増えます。偽装死していないタスクフェーズ中は減少し、会議中は増減しません。
 - **勝利条件** — ゲーム終了時にステュクスが必要量以上なら、カロンが勝利を奪います。死亡後も条件を満たせば勝利でき、複数のカロンが条件を満たした場合は全員が勝利します。
 
@@ -33,4 +33,4 @@ ZIPの直下に `addon.meta`、`Scripts/`、`Language/` が必要です。
 
 This is an unofficial add-on. It is unaffiliated with the Nebula on the Ship development team.
 
-Charon is a neutral role for Nebula on the Ship. Feign death, travel farther from your corpse to build Styx, and revive within the map before a meeting or expiration. If Styx meets the threshold when the game ends, Charon takes the win. Put `Charon.zip` in the modded game's `Addons/` directory and enable Charon in the neutral role settings.
+Charon is a neutral role for Nebula on the Ship. Feign death, travel farther from your corpse to build Styx, and revive within the map before a meeting or, when the time limit is on, before the timer expires. If Styx meets the threshold when the game ends, Charon takes the win. Put `Charon.zip` in the modded game's `Addons/` directory and enable Charon in the neutral role settings.
