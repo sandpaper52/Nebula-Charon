@@ -1,0 +1,9 @@
+{
+  "Id": "nebula-charon",
+  "Name": "Charon",
+  "Author": "sandpaper52",
+  "Description": "Adds Charon, a neutral role who fills the Styx gauge by feigning death.",
+  "Version": "1.0.0",
+  "Build": 1,
+  "Dependency": []
+}
